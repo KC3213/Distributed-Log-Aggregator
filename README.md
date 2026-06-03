@@ -1,6 +1,6 @@
-# LilLil LogLog!
+# Distributed Log Aggregator
 
-LilLil LogLog (or just LogLog for short) is (well... will be) a distributed, replicated,
+Distributed Log Aggregator is (well... will be) a distributed, replicated,
 ordered, strongly consistent, (eventually) fault-tolerant binary log in Rust.
 
 Anytime I think about communication patterns in distributed systems,
@@ -31,7 +31,7 @@ So here is the plan:
   to client.
 * The distributed part is mostly about replication (so we don't loose data). Sharding usually
   can't guarantee ordering between shards anyway, so it's not as interesting (at least yet)
-* If you need sharding you probably outgrew LilLilLogLog - build something on top, or just split
+* If you need sharding you probably outgrew - build something on top, or just split
   your log, or (fork? and) implement sharding.
 * Use byte offsets in segmented (split into separate files) log as ids (like Kafka).
 * Limit event sizes to around 3B value. Puts some reasonable bounds on latency.
@@ -48,7 +48,10 @@ So here is the plan:
   any replica, and replicas won't return anything they don't have or that is not yet commited.
 * Seems like `tokio-uring` has enough functionality to fit these needs, so might as well start with it.
 
-I'm definitely a lillil bit out of depth here, but I trust the Internet will reliably tell me which of my
+I'm definitely a bit out of depth here, but I trust the Internet will reliably tell me which of my
 ideas are stupid, and worst case I'll just learn some stuff and deliver nothing. 🤷
+
+This is a forked project, the reason i forked is to learn about it and add my contributions to it
+the origin owner of this repo is https://github.com/rustshop/loglog
 
 Read [the design doc](./README.design.md)
